@@ -15,19 +15,21 @@ int main(int argc, char **argv)
 	char buf[MAXBUF];
 	struct sockaddr_in clientaddr, serveraddr;
 
-	client_len = sizeof(clientaddr);
+	client_len = sizeof(clientaddr); // 클라이언트 주소의 길이
 
 	if((server_sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1)
 	{
+		// socket 함수로 소켓 생성
 		perror("socket error :");
 	}
+
 	bzero(&serveraddr, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
-	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serveraddr.sin_port = htons(atoi(argv[1]));
+	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY); // INADDR_ANY(0.0.0.0), 즉 모든 주소에 대해 연결을 기다린다.
+	serveraddr.sin_port = htons(atoi(argv[1])); // port를 설정한다.
 
-	bind(server_sockfd, (struct sockaddr *) &serveraddr, sizeof(serveraddr));
-	listen(server_sockfd, 5);
+	bind(server_sockfd, (struct sockaddr *) &serveraddr, sizeof(serveraddr)); // 위의 설정들을 적용한다.
+	listen(server_sockfd, 5); // 수신 대기열을 정한다.
 
 	while(1)
 	{
