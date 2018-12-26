@@ -41,6 +41,16 @@ int main(int argc, char **argv)
 			close(client_sockfd);
 			continue;
 		}
+		else
+		{
+			if(strncmp(buf, "shutdown", 8) == 0) // "shutdown" 문자열을 입력받으면 서버를 종료한다.
+			{
+				printf("Shut Down...\n");
+				close(client_sockfd);
+				break;
+			}
+			printf("read data : %s", buf); // 읽은 데이터를 출력한다.
+		}
 		if(write(client_sockfd, buf, MAXBUF) <= 0)
 		{
 			perror("write error :");
