@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	}
 
 	serveraddr.sin_family = AF_INET;
-	serveraddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	serveraddr.sin_addr.s_addr = inet_addr("192.168.219.107"); // 윈도우와의 연동을 위해 윈도우 PC의 IP를 사용, PORT는 3500으로 설정하자.
 	serveraddr.sin_port = htons(atoi(argv[1]));
 
 	client_len = sizeof(serveraddr);
